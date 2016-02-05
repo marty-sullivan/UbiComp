@@ -24,8 +24,8 @@ public class Shake extends AppCompatActivity implements SensorEventListener {
     private Sensor mAccelerometer;
     private Sensor mBarometer;
 
-    private Button btnStart, btnStop;
-    private TextView txtAccel, txtDetect;
+    private Button btnStart, btnStop, btnPressure;
+    private TextView txtAccel, txtDetect, txtPressure;
     private EditText editThreshold;
 
     private Shake self = this;
@@ -49,8 +49,10 @@ public class Shake extends AppCompatActivity implements SensorEventListener {
 
         btnStart = (Button)findViewById(R.id.btnStart);
         btnStop = (Button)findViewById(R.id.btnStop);
+        btnPressure = (Button)findViewById(R.id.btnPressure);
         txtAccel = (TextView)findViewById(R.id.txtAccel);
         txtDetect = (TextView)findViewById(R.id.txtDetect);
+        txtPressure = (TextView)findViewById(R.id.txtPressure);
         editThreshold = (EditText)findViewById(R.id.editThreshold);
 
         // Set Start Button Listener
@@ -72,6 +74,12 @@ public class Shake extends AppCompatActivity implements SensorEventListener {
                 mSensorManager.unregisterListener(self);
                 txtAccel.setText("");
                 txtDetect.setText("");
+            }
+        });
+
+        btnPressure.setOnClickListener(new Button.OnClickListener() {
+            public void onClick(View v) {
+                mSensorManager.registerListener(self, mBarometer, SensorManager.SENSOR_DELAY_NORMAL);
             }
         });
 
@@ -103,10 +111,10 @@ public class Shake extends AppCompatActivity implements SensorEventListener {
     }
 
 
-    private boolean isShaking(double ax, double ay, double az, double threshold) {
+    private boolean isShaking(float[] axes, double threshold) {
         boolean shaking = false;
 
-        if (Math.sqrt(Math.pow(ax, 2) + Math.pow(ay, 2) + Math.pow(az, 2)) >= threshold) {
+        if (Math.sqrt(Math.pow(axes[0], 2) + Math.pow(axes[1], 2) + Math.pow(axes[2], 2)) >= threshold) {
             shaking = true;
         }
 
@@ -118,7 +126,7 @@ public class Shake extends AppCompatActivity implements SensorEventListener {
     public void onSensorChanged(SensorEvent event) {
         if (event.sensor.getType() == Sensor.TYPE_ACCELEROMETER) {
             txtAccel.setText(Arrays.toString(event.values));
-            if (this.isShaking(event.values[0], event.values[1], event.values[2], threshold)) {
+            if (this.isShaking(event.values, threshold)) {
                 txtDetect.setText("Shake");
             }
             else {
@@ -126,7 +134,10 @@ public class Shake extends AppCompatActivity implements SensorEventListener {
             }
         }
         else if (event.sensor.getType() == Sensor.TYPE_PRESSURE) {
-
+            txtPressure.setText(Float.toString(event.values[0]));
+            mSensorManager.unregisterListener(this);
+            txtAccel.setText("");
+            txtDetect.setText("");
         }
     }
 

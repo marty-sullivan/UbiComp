@@ -55,7 +55,8 @@
         android:inputType="numberDecimal"
         android:ems="10"
         android:id="@+id/editThreshold"
-        android:layout_centerVertical="true"
+        android:layout_marginTop="43dp"
+        android:layout_below="@+id/txtDetect"
         android:layout_alignRight="@+id/txtTitle2"
         android:layout_alignEnd="@+id/txtTitle2" />
 
@@ -66,8 +67,8 @@
         android:text="Start"
         android:id="@+id/btnStart"
         android:layout_below="@+id/editThreshold"
-        android:layout_toLeftOf="@+id/btnStop"
-        android:layout_toStartOf="@+id/btnStop" />
+        android:layout_alignLeft="@+id/editThreshold"
+        android:layout_alignStart="@+id/editThreshold" />
 
     <Button
         style="?android:attr/buttonStyleSmall"
@@ -75,7 +76,26 @@
         android:layout_height="wrap_content"
         android:text="Stop"
         android:id="@+id/btnStop"
-        android:layout_alignTop="@+id/btnStart"
-        android:layout_centerHorizontal="true" />
+        android:layout_below="@+id/editThreshold"
+        android:layout_toRightOf="@+id/btnStart"
+        android:layout_toEndOf="@+id/btnStart" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Get Atmospheric Pressure"
+        android:id="@+id/btnPressure"
+        android:layout_below="@+id/btnStart"
+        android:layout_alignLeft="@+id/editThreshold"
+        android:layout_alignStart="@+id/editThreshold"
+        android:layout_marginTop="46dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtPressure"
+        android:layout_below="@+id/btnPressure"
+        android:layout_alignLeft="@+id/btnPressure"
+        android:layout_alignStart="@+id/btnPressure" />
 
 </RelativeLayout>
