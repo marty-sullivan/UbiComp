@@ -1,6 +1,6 @@
 This is Marty Sullivan's completed Android application with bonus point section completed as well.
 
-The most challenging part of the assignment was getting the layout to work right; I hate GUI editors! Eventually I got things looking how I wanted though by poking around the interface a bit.
+The most challenging part of the assignment was getting the layout to work right; I hate GUI editors! Eventually I got things looking how I wanted though by poking around the interface a bit and forcing portrait mode.
 
 
 HOWTO:
