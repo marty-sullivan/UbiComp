@@ -60,7 +60,12 @@ public class Shake extends AppCompatActivity implements SensorEventListener {
             public void onClick(View v) {
                 try {
                     threshold = Double.parseDouble(editThreshold.getText().toString());
-                    mSensorManager.registerListener(self, mAccelerometer, SensorManager.SENSOR_DELAY_NORMAL);
+                    if (threshold >= 8 && threshold <= 25) {
+                        mSensorManager.registerListener(self, mAccelerometer, SensorManager.SENSOR_DELAY_NORMAL);
+                    }
+                    else {
+                        txtDetect.setText("Error: Set Threshold to sensible value (8 <= threshold <= 25)");
+                    }
                 }
                 catch (Exception e) {
                     txtDetect.setText("Error: Set Threshold to a decimal value.");
